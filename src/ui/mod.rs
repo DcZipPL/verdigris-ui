@@ -2,11 +2,9 @@ use std::fmt;
 
 use rgb::RGBA16;
 
-pub mod alert;
-pub mod button;
-pub mod card;
-pub mod grid;
-pub mod space;
+pub mod display;
+pub mod input;
+pub mod layout;
 pub mod typography;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]

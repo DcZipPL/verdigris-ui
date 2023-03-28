@@ -4,11 +4,11 @@ use leptos_router::*;
 use crate::ui::Padding;
 use crate::ui::Size;
 use crate::ui::Variant;
-use crate::ui::alert::*;
-use crate::ui::card::*;
-use crate::ui::button::*;
-use crate::ui::grid::*;
-use crate::ui::space::*;
+use crate::ui::display::alert::*;
+use crate::ui::display::card::*;
+use crate::ui::input::button::*;
+use crate::ui::layout::grid::*;
+use crate::ui::layout::space::*;
 use crate::ui::typography::*;
 
 #[component]
