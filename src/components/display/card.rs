@@ -1,6 +1,6 @@
 use leptos::*;
 
-use crate::ui::{Radius, Padding};
+use crate::components::{Radius, Padding};
 
 #[component]
 pub fn Card(cx: Scope,

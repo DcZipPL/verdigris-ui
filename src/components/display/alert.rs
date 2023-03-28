@@ -1,6 +1,6 @@
 use leptos::*;
 
-use crate::ui::{Variant, Radius};
+use crate::components::{Variant, Radius};
 
 #[component]
 pub fn Alert(cx: Scope,

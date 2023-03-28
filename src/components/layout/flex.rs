@@ -1,6 +1,6 @@
 use leptos::*;
 
-use crate::ui::{layout::{Justify, Align, Direction, Wrap}, Size};
+use crate::components::{layout::{Justify, Align, Direction, Wrap}, Size};
 
 #[component]
 pub fn Flex(cx: Scope,

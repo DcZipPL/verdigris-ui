@@ -1,6 +1,6 @@
 use leptos::*;
 
-use crate::ui::Size;
+use crate::components::Size;
 
 #[component]
 pub fn Space(cx: Scope,

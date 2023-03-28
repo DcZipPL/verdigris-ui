@@ -1,7 +1,7 @@
 use leptos::*;
 use rgb::RGBA16;
 
-use crate::ui::{Radius, Size};
+use crate::components::{Radius, Size};
 
 #[component]
 pub fn Badge(cx: Scope,
