@@ -1,0 +1,23 @@
+@use "colors";
+@use "size";
+@use "button";
+@use "alert";
+@use "containers";
+@use "typography";
+
+:root {
+	background-color: colors.$background-light-card;
+}
+
+body {
+	font-family: sans-serif;
+	text-align: center;
+}
+
+.preview-background {
+	background-color: colors.$background-light;
+
+	> * > * {
+		text-align: initial;
+	}
+}

@@ -1,0 +1,8 @@
+@use "colors";
+
+code {
+    background-color: colors.$typo-code;
+    padding: 0.125rem;
+    border-radius: 0.25rem;
+    display: inline;
+}
