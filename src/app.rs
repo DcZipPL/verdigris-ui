@@ -8,6 +8,7 @@ use crate::ui::display::alert::*;
 use crate::ui::display::badge::*;
 use crate::ui::display::card::*;
 use crate::ui::input::button::*;
+use crate::ui::layout::flex::*;
 use crate::ui::layout::grid::*;
 use crate::ui::layout::space::*;
 use crate::ui::typography::*;
@@ -79,6 +80,18 @@ fn HomePage(cx: Scope) -> impl IntoView {
                 <Button variant=Variant::Subtle>"Subtle Button"</Button><Space width=Size::Medium/>
             </div>
             <div>
+                <h2>"Badge"</h2>
+                <Badge variant=BadgeVariant::Filled>"Filled"</Badge><Space width=Size::Medium/>
+                <Badge variant=BadgeVariant::Outline>"Outline"</Badge><Space width=Size::Medium/>
+                <Badge variant=BadgeVariant::Light>"Light"</Badge><Space width=Size::Medium/>
+                <Badge variant=BadgeVariant::Dot>"Dot"</Badge><Space width=Size::Medium/>
+            </div>
+            <Flex>
+                <h2>"Flex"</h2>
+                <Space width=Size::Medium/>
+                "A container"
+            </Flex>
+            <div>
                 <h2>"Typography"</h2>
                 <h1>"Heading 1"</h1>
                 <h2>"Heading 2"</h2>
@@ -92,13 +105,6 @@ fn HomePage(cx: Scope) -> impl IntoView {
                 <Code>"Code"</Code>
                 <Space height=Size::Medium/>
                 "This "<Mark color=HighlightColor::Purple>"is example"</Mark>" "<Mark>"text"</Mark>" with "<Mark color=HighlightColor::Blue>"markings"</Mark>" and custom "<Code color=HighlightColor::Orange>"inline code block"</Code>""
-            </div>
-            <div>
-                <h2>"Badge"</h2>
-                <Badge variant=BadgeVariant::Filled>"Filled"</Badge><Space width=Size::Medium/>
-                <Badge variant=BadgeVariant::Outline>"Outline"</Badge><Space width=Size::Medium/>
-                <Badge variant=BadgeVariant::Light>"Light"</Badge><Space width=Size::Medium/>
-                <Badge variant=BadgeVariant::Dot>"Dot"</Badge><Space width=Size::Medium/>
             </div>
         </Grid>
         <Button on:click=on_click variant=Variant::Filled>"Click Me: " {count}</Button>
