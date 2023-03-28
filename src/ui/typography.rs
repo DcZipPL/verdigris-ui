@@ -11,13 +11,15 @@ pub fn Code(cx: Scope,
 ) -> impl IntoView
 {
     view! { cx,
-        <code class="code">{children(cx)}</code>
+        <code class="code" style={
+            if let Some(c) = color {format!("background-color: {}", c)}
+            else {String::new()}
+        }>{children(cx)}</code>
     }
 }
 
 #[component]
 pub fn Mark(cx: Scope,
-    #[prop(default=false)] block: bool,
     #[prop(optional)] color: Option<HighlightColor>,
     children: Children,
 ) -> impl IntoView

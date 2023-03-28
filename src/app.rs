@@ -5,6 +5,7 @@ use crate::ui::Padding;
 use crate::ui::Size;
 use crate::ui::Variant;
 use crate::ui::display::alert::*;
+use crate::ui::display::badge::*;
 use crate::ui::display::card::*;
 use crate::ui::input::button::*;
 use crate::ui::layout::grid::*;
@@ -72,10 +73,10 @@ fn HomePage(cx: Scope) -> impl IntoView {
             </div>
             <div>
                 <h2>"Button"</h2>
-                <Button variant=Variant::Filled>"Filled Button"</Button><Space height=Size::Medium/>
-                <Button variant=Variant::Outline>"Outline Button"</Button><Space height=Size::Medium/>
-                <Button variant=Variant::Light>"Light Button"</Button><Space height=Size::Medium/>
-                <Button variant=Variant::Subtle>"Subtle Button"</Button><Space height=Size::Medium/>
+                <Button variant=Variant::Filled>"Filled Button"</Button><Space width=Size::Medium/>
+                <Button variant=Variant::Outline>"Outline Button"</Button><Space width=Size::Medium/>
+                <Button variant=Variant::Light>"Light Button"</Button><Space width=Size::Medium/>
+                <Button variant=Variant::Subtle>"Subtle Button"</Button><Space width=Size::Medium/>
             </div>
             <div>
                 <h2>"Typography"</h2>
@@ -90,7 +91,14 @@ fn HomePage(cx: Scope) -> impl IntoView {
                 <Space height=Size::Medium/>
                 <Code>"Code"</Code>
                 <Space height=Size::Medium/>
-                "This "<Mark color=HighlightColor::Purple>"is example"</Mark>" "<Mark>"text"</Mark>" with "<Mark color=HighlightColor::Blue>"markings"</Mark>" and "<Code>"inline code block"</Code>""
+                "This "<Mark color=HighlightColor::Purple>"is example"</Mark>" "<Mark>"text"</Mark>" with "<Mark color=HighlightColor::Blue>"markings"</Mark>" and custom "<Code color=HighlightColor::Orange>"inline code block"</Code>""
+            </div>
+            <div>
+                <h2>"Badge"</h2>
+                <Badge variant=BadgeVariant::Filled>"Filled"</Badge><Space width=Size::Medium/>
+                <Badge variant=BadgeVariant::Outline>"Outline"</Badge><Space width=Size::Medium/>
+                <Badge variant=BadgeVariant::Light>"Light"</Badge><Space width=Size::Medium/>
+                <Badge variant=BadgeVariant::Dot>"Dot"</Badge><Space width=Size::Medium/>
             </div>
         </Grid>
         <Button on:click=on_click variant=Variant::Filled>"Click Me: " {count}</Button>

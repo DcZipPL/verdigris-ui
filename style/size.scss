@@ -26,6 +26,10 @@
     border-radius: 50%;
 }
 
+.height-micro {
+    height: 0.1rem;
+}
+
 .height-extrasmall {
     height: 0.625rem;
 }
@@ -44,6 +48,10 @@
 
 .height-extralarge {
     height: 1.5rem;
+}
+
+.width-micro {
+    height: 0.1rem;
 }
 
 .width-extrasmall {
@@ -66,27 +74,27 @@
     width: 1.5rem;
 }
 
-.size-extrasmall.full-size {
+button.size-extrasmall.full-size {
     height: 1.875rem;
     padding: 0px 0.875rem;
 }
 
-.size-small.full-size {
+button.size-small.full-size {
     height: 2.25rem;
     padding: 0px 1.125rem;
 }
 
-.size-medium.full-size {
+button.size-medium.full-size {
     height: 2.625rem;
     padding: 0px 1.375rem;
 }
 
-.size-large.full-size {
+button.size-large.full-size {
     height: 3.125rem;
     padding: 0px 1.625rem;
 }
 
-.size-extralarge.full-size {
+button.size-extralarge.full-size {
     height: 3.75rem;
     padding: 0px 2rem;
 }

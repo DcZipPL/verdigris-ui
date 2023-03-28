@@ -21,6 +21,7 @@ pub enum Radius {
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Size {
     None,
+    Micro,
     ExtraSmall,
     Small,
     Medium,
@@ -57,7 +58,6 @@ pub enum Variant {
     Outline,
     Light,
     Subtle,
-    Grayed,
     Gradient(RGBA16, RGBA16, u8), // From, To, Angle
 }
 
