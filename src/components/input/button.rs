@@ -4,6 +4,7 @@ use styled::style;
 
 use crate::components::Size;
 use crate::components::Radius;
+use crate::components::Unit;
 use crate::components::Variant;
 use crate::theme::Theme;
 
@@ -50,8 +51,21 @@ pub fn Button(cx: Scope,
     let styles = style!(
         button {
             cursor: pointer;
-            height: ${size.ib_height()};
-            padding: ${format!("0 {}", size.ib_padding())};
+            height: ${
+                if compact {
+                    "auto".to_string()
+                } else {
+                    size.ib_height().to_string()
+                }
+            };
+            padding: ${
+                if compact {
+                    Unit::Rem(0.25).to_string()
+                } else {
+                    format!("0 {}", size.ib_padding())
+                }
+            };
+            font-size: ${size.ib_font_size()};
             border-radius: ${radius.units()};
             border: ${border_prop};
             color: ${foreground_color.rgba()};
@@ -69,10 +83,7 @@ pub fn Button(cx: Scope,
     );
 
     styled::view! { cx, styles,
-        <button class=size.to_string()
-                class=radius.to_string()
-                class=variant.to_string()
-                class=if compact { "compact" } else { "full-size" }
+        <button class=if compact { "compact" } else { "full-size" }
                 disabled=disabled
         >
             {children(cx)}

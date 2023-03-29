@@ -6,6 +6,7 @@ pub mod display;
 pub mod input;
 pub mod layout;
 pub mod typography;
+pub mod misc;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Radius {
@@ -135,6 +136,19 @@ impl Size {
             Size::Medium => Unit::Rem(1.375),
             Size::Large => Unit::Rem(1.625),
             Size::ExtraLarge => Unit::Rem(2.0),
+            Size::Custom(unit) => unit.clone(),
+        }
+    }
+
+    pub(crate) fn ib_font_size(&self) -> Unit {
+        match self {
+            Size::None => Unit::Px(0),
+            Size::Micro => Unit::Rem(0.375),
+            Size::ExtraSmall => Unit::Rem(0.75),
+            Size::Small => Unit::Rem(0.875),
+            Size::Medium => Unit::Rem(1.0),
+            Size::Large => Unit::Rem(1.125),
+            Size::ExtraLarge => Unit::Rem(1.25),
             Size::Custom(unit) => unit.clone(),
         }
     }

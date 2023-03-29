@@ -1,6 +1,7 @@
 use leptos::*;
+use styled::style;
 
-use crate::components::{Variant, Radius};
+use crate::{components::{Variant, Radius}, theme::Theme};
 
 #[component]
 pub fn Alert(cx: Scope,
@@ -10,7 +11,23 @@ pub fn Alert(cx: Scope,
     children: Children,
 ) -> impl IntoView
 {
-    view! { cx,
+    let colors = Theme::Light.colors();
+
+    let styles = style!(
+        .alert {
+            padding: 0.75rem 0.75rem 0.75rem 1rem;
+            background-color: ${colors.primary.clone().fade(0.1).unwrap().rgba()};
+            text-align: left;
+        }
+
+        & > .title {
+            color: ${colors.primary.rgba()};
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+    );
+
+    styled::view! { cx, styles,
         <div class="alert" class=radius.to_string() class=variant.to_string()>
             <div class="title">{title}</div>
             <div>

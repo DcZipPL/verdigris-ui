@@ -1,5 +1,5 @@
 use color_art::Color;
-use std::str::FromStr;
+use std::{str::FromStr, fmt};
 
 pub struct Colors {
     pub primary: Color,
@@ -7,6 +7,7 @@ pub struct Colors {
     pub foreground: Color,
     pub background: Color,
     pub background_alt: Color,
+    pub code_background: Color,
 }
 
 pub enum Theme {
@@ -22,7 +23,29 @@ impl Theme {
                 foreground: Color::from_str("#000").unwrap(),
                 background: Color::from_str("#fff").unwrap(),
                 background_alt: Color::from_str("#f8f9fa").unwrap(),
+                code_background: Color::from_str("#f8f9fa").unwrap(),
             },
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum HighlightColor {
+    Yellow, Green, Blue, Red, Purple, Orange, Gray,
+    Color(Color)
+}
+
+impl fmt::Display for HighlightColor {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            HighlightColor::Yellow => write!(f, "#ffec99"),
+            HighlightColor::Green => write!(f, "#b3ff99"),
+            HighlightColor::Blue => write!(f, "#99ffff"),
+            HighlightColor::Red => write!(f, "#ff9999"),
+            HighlightColor::Purple => write!(f, "#ff99ff"),
+            HighlightColor::Orange => write!(f, "#ffcc99"),
+            HighlightColor::Gray => write!(f, "#cccccc"),
+            HighlightColor::Color(color) => write!(f, "{}", color.hex()),
         }
     }
 }
