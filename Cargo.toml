@@ -10,7 +10,7 @@ crate-type = ["cdylib", "rlib"]
 leptos = { version = "0.2.4", default-features = false, features = [
   "serde",
 ] }
-csscolorparser = "0.6.2"
 stylist = "0.12.0"
 styled = "0.1.36"
-rgb = "0.8.36"
+color-art = "0.2.3"
+anyhow = "1.0.70"

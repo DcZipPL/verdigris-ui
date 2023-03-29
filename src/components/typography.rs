@@ -1,7 +1,7 @@
 use std::fmt;
 
+use color_art::Color;
 use leptos::*;
-use rgb::RGBA16;
 
 #[component]
 pub fn Code(cx: Scope,
@@ -34,10 +34,10 @@ pub fn Mark(cx: Scope,
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum HighlightColor {
     Yellow, Green, Blue, Red, Purple, Orange, Gray,
-    Color(RGBA16)
+    Color(Color)
 }
 
 impl fmt::Display for HighlightColor {
@@ -50,7 +50,7 @@ impl fmt::Display for HighlightColor {
             HighlightColor::Purple => write!(f, "#ff99ff"),
             HighlightColor::Orange => write!(f, "#ffcc99"),
             HighlightColor::Gray => write!(f, "#cccccc"),
-            HighlightColor::Color(color) => write!(f, "{}", color),
+            HighlightColor::Color(color) => write!(f, "{}", color.hex()),
         }
     }
 }

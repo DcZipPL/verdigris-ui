@@ -1,13 +1,13 @@
 use std::fmt;
 
-use rgb::RGBA16;
+use color_art::Color;
 
 pub mod display;
 pub mod input;
 pub mod layout;
 pub mod typography;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Radius {
     None,
     ExtraSmall,
@@ -16,6 +16,7 @@ pub enum Radius {
     Large,
     ExtraLarge,
     Circle,
+    Custom(Unit),
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -52,13 +53,13 @@ pub enum Margin {
     Custom(Unit),
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Variant {
     Filled,
     Outline,
     Light,
     Subtle,
-    Gradient(RGBA16, RGBA16, u8), // From, To, Angle
+    Gradient(Color, Color, u8), // From, To, Angle
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -86,9 +87,52 @@ impl fmt::Display for Radius {
     }
 }
 
+impl Radius {
+    pub(crate) fn units(&self) -> Unit {
+        match self {
+            Radius::None => Unit::Px(0),
+            Radius::ExtraSmall => Unit::Rem(0.125),
+            Radius::Small => Unit::Rem(0.25),
+            Radius::Medium => Unit::Rem(0.5),
+            Radius::Large => Unit::Rem(1.0),
+            Radius::ExtraLarge => Unit::Rem(2.0),
+            Radius::Circle => Unit::Percent(50),
+            Radius::Custom(unit) => unit.clone(),
+        }
+    }
+}
+
 impl fmt::Display for Size {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", format!("size-{:?}", self).to_lowercase())
+    }
+}
+
+impl Size {
+    pub(crate) fn ib_height(&self) -> Unit {
+        match self {
+            Size::None => Unit::Px(0),
+            Size::Micro => Unit::Rem(1.375),
+            Size::ExtraSmall => Unit::Rem(1.875),
+            Size::Small => Unit::Rem(2.25),
+            Size::Medium => Unit::Rem(2.625),
+            Size::Large => Unit::Rem(3.125),
+            Size::ExtraLarge => Unit::Rem(3.75),
+            Size::Custom(unit) => unit.clone(),
+        }
+    }
+
+    pub(crate) fn ib_padding(&self) -> Unit {
+        match self {
+            Size::None => Unit::Px(0),
+            Size::Micro => Unit::Rem(0.625),
+            Size::ExtraSmall => Unit::Rem(0.875),
+            Size::Small => Unit::Rem(1.125),
+            Size::Medium => Unit::Rem(1.375),
+            Size::Large => Unit::Rem(1.625),
+            Size::ExtraLarge => Unit::Rem(2.0),
+            Size::Custom(unit) => unit.clone(),
+        }
     }
 }
 

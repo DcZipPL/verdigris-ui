@@ -1,5 +1,5 @@
+use color_art::Color;
 use leptos::*;
-use rgb::RGBA16;
 
 use crate::components::{Radius, Size};
 
@@ -18,11 +18,11 @@ pub fn Badge(cx: Scope,
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum BadgeVariant {
     Filled,
     Outline,
     Light,
     Dot,
-    Gradient(RGBA16, RGBA16, u8), // From, To, Angle
+    Gradient(Color, Color, u8), // From, To, Angle
 }
