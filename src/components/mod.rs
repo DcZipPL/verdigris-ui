@@ -109,6 +109,19 @@ impl fmt::Display for Size {
 }
 
 impl Size {
+    pub(crate) fn space(&self) -> Unit {
+        match self {
+            Size::None => Unit::Px(0),
+            Size::Micro => Unit::Rem(0.1),
+            Size::ExtraSmall => Unit::Rem(0.625),
+            Size::Small => Unit::Rem(0.75),
+            Size::Medium => Unit::Rem(1.0),
+            Size::Large => Unit::Rem(1.25),
+            Size::ExtraLarge => Unit::Rem(1.5),
+            Size::Custom(unit) => unit.clone(),
+        }
+    }
+
     pub(crate) fn ib_height(&self) -> Unit {
         match self {
             Size::None => Unit::Px(0),

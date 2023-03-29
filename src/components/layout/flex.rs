@@ -1,4 +1,5 @@
 use leptos::*;
+use styled::style;
 
 use crate::components::{layout::{Justify, Align, Direction, Wrap}, Size};
 
@@ -14,34 +15,42 @@ pub fn Flex(cx: Scope,
 {
     let gap = gap.to_string().replace("size", "gap");
     let justify_style = match justify {
-        Justify::FlexStart => "justify-content: flex-start;",
-        Justify::Center => "justify-content: center;",
-        Justify::FlexEnd => "justify-content: flex-end;",
+        Justify::FlexStart => "flex-start",
+        Justify::Center => "center",
+        Justify::FlexEnd => "flex-end",
     };
 
     let align_style = match align {
-        Align::FlexStart => "align-items: flex-start;",
-        Align::Center => "align-items: center;",
-        Align::FlexEnd => "align-items: flex-end;",
+        Align::FlexStart => "flex-start",
+        Align::Center => "center",
+        Align::FlexEnd => "flex-end",
     };
 
     let direction_style = match direction {
-        Direction::Row => "flex-direction: row;",
-        Direction::Column => "flex-direction: column;",
-        Direction::RowReverse => "flex-direction: row-reverse;",
-        Direction::ColumnReverse => "flex-direction: column-reverse;",
+        Direction::Row => "row",
+        Direction::Column => "column",
+        Direction::RowReverse => "row-reverse",
+        Direction::ColumnReverse => "column-reverse",
     };
 
     let wrap_style = match wrap {
-        Wrap::Wrap => "flex-wrap: wrap;",
-        Wrap::Nowrap => "flex-wrap: nowrap;",
-        Wrap::WrapReverse => "flex-wrap: wrap-reverse;",
+        Wrap::Wrap => "wrap",
+        Wrap::Nowrap => "nowrap",
+        Wrap::WrapReverse => "wrap-reverse",
     };
 
-    let style = format!("display: flex; {}{}{}{}", justify_style, align_style, direction_style, wrap_style);
+    let styles = style!(
+        div {
+            display: flex;
+            justify-content: ${justify_style};
+            align-items: ${align_style};
+            flex-direction: ${direction_style};
+            flex-wrap: ${wrap_style};
+        }
+    );
 
-    view! { cx,
-        <div class="flex" class=gap style=style>
+    styled::view! { cx, styles,
+        <div class="flex" class=gap>
             {children(cx)}
         </div>
     }
