@@ -11,7 +11,7 @@ pub fn Space(cx: Scope,
 {
     let styles = style!(
         div {
-            display: block;
+            display: inline-block;
             width: ${width.space()};
             height: ${height.space()};
         }

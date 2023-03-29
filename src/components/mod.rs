@@ -32,28 +32,6 @@ pub enum Size {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
-pub enum Padding {
-    None,
-    ExtraSmall,
-    Small,
-    Medium,
-    Large,
-    ExtraLarge,
-    Custom(Unit),
-}
-
-#[derive(Debug, Clone, Copy, PartialEq)]
-pub enum Margin {
-    None,
-    ExtraSmall,
-    Small,
-    Medium,
-    Large,
-    ExtraLarge,
-    Custom(Unit),
-}
-
-#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Variant {
     Filled,
     Outline,
@@ -122,6 +100,19 @@ impl Size {
         }
     }
 
+    pub(crate) fn padding(&self) -> Unit {
+        match self {
+            Size::None => Unit::Px(0),
+            Size::Micro => Unit::Rem(0.1),
+            Size::ExtraSmall => Unit::Rem(0.25),
+            Size::Small => Unit::Rem(0.5),
+            Size::Medium => Unit::Rem(1.0),
+            Size::Large => Unit::Rem(1.25),
+            Size::ExtraLarge => Unit::Rem(2.0),
+            Size::Custom(unit) => unit.clone(),
+        }
+    }
+
     pub(crate) fn ib_height(&self) -> Unit {
         match self {
             Size::None => Unit::Px(0),
@@ -146,18 +137,6 @@ impl Size {
             Size::ExtraLarge => Unit::Rem(2.0),
             Size::Custom(unit) => unit.clone(),
         }
-    }
-}
-
-impl fmt::Display for Padding {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", format!("padding-{:?}", self).to_lowercase())
-    }
-}
-
-impl fmt::Display for Margin {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", format!("margin-{:?}", self).to_lowercase())
     }
 }
 
