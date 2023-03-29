@@ -11,10 +11,13 @@ pub fn Alert(cx: Scope,
     children: Children,
 ) -> impl IntoView
 {
+    // TODO: Implement variant
+
     let colors = Theme::Light.colors();
 
     let styles = style!(
         .alert {
+            border-radius: ${radius.units()};
             padding: 0.75rem 0.75rem 0.75rem 1rem;
             background-color: ${colors.primary.clone().fade(0.1).unwrap().rgba()};
             text-align: left;
@@ -28,7 +31,7 @@ pub fn Alert(cx: Scope,
     );
 
     styled::view! { cx, styles,
-        <div class="alert" class=radius.to_string() class=variant.to_string()>
+        <div class="alert">
             <div class="title">{title}</div>
             <div>
                 {children(cx)}

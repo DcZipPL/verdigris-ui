@@ -13,17 +13,19 @@ pub fn Flex(cx: Scope,
     children: Children,
 ) -> impl IntoView
 {
-    let gap = gap.to_string().replace("size", "gap");
     let justify_style = match justify {
         Justify::FlexStart => "flex-start",
         Justify::Center => "center",
         Justify::FlexEnd => "flex-end",
+        Justify::Stretch => "stretch",
+        Justify::SpaceBetween => "space-between",
     };
 
     let align_style = match align {
         Align::FlexStart => "flex-start",
         Align::Center => "center",
         Align::FlexEnd => "flex-end",
+        Align::Stretch => "stretch",
     };
 
     let direction_style = match direction {
@@ -46,11 +48,12 @@ pub fn Flex(cx: Scope,
             align-items: ${align_style};
             flex-direction: ${direction_style};
             flex-wrap: ${wrap_style};
+            gap: ${gap.space()};
         }
     );
 
     styled::view! { cx, styles,
-        <div class="flex" class=gap>
+        <div class="flex">
             {children(cx)}
         </div>
     }

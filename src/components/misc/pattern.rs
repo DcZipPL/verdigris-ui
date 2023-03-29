@@ -3,7 +3,7 @@ use styled::style;
 
 #[component]
 pub fn Pattern(cx: Scope,
-    #[prop(default=PatternType::Grid)] pattern_type: PatternType,
+    #[prop(default=PatternType::Dot)] pattern_type: PatternType,
     children: Children,
 ) -> impl IntoView
 {
