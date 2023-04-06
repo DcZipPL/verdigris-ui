@@ -127,6 +127,19 @@ impl Size {
         }
     }
 
+    pub(crate) fn headerbar_height(&self) -> Unit {
+        match self {
+            Size::None => Unit::Px(0),
+            Size::Micro => Unit::Rem(1.875),
+            Size::ExtraSmall => Unit::Rem(2.25),
+            Size::Small => Unit::Rem(2.625),
+            Size::Medium => Unit::Rem(3.125),
+            Size::Large => Unit::Rem(3.75),
+            Size::ExtraLarge => Unit::Rem(4.0),
+            Size::Custom(unit) => unit.clone(),
+        }
+    }
+
     pub(crate) fn ib_padding(&self) -> Unit {
         match self {
             Size::None => Unit::Px(0),

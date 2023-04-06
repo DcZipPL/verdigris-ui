@@ -1,6 +1,7 @@
 use leptos::*;
+use styled::style;
 
-use crate::components::{layout::{Justify, Align, flex::*}, Size};
+use crate::components::{layout::{Position, Direction, Justify, flex::*}, Size};
 
 #[component]
 pub fn Group(cx: Scope,
@@ -8,25 +9,28 @@ pub fn Group(cx: Scope,
     #[prop(default=Size::Medium)] gap: Size,
     #[prop(default=false)] grow: bool,
     children: Children,
+    #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let styles = style!(
         div {
             display: flex;
-            justify-content: ${
-                match position {
-                    Position::Left => "flex-start",
-                    Position::Center => "center",
-                    Position::Right => "flex-end",
-                    Position::Apart => "space-between",
-                }
-            };
-            gap: ${gap.space()};
         }
     );
 
+    let mut justify = match position {
+        Position::Left => Justify::FlexStart,
+        Position::Center => Justify::Center,
+        Position::Right => Justify::FlexEnd,
+        Position::Apart => Justify::SpaceBetween,
+    };
+
+    if grow {
+        justify = Justify::Stretch;
+    }
+
     styled::view! { cx, styles,
-        <Flex align=align justify=justify gap=gap direction=crate::components::layout::Direction::Row>
+        <Flex justify=justify gap=gap direction=Direction::Row style=style>
             {children(cx)}
         </Flex>
     }
