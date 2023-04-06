@@ -9,6 +9,7 @@ pub fn Alert(cx: Scope,
     #[prop(default=Radius::Small)] radius: Radius,
     #[prop(default=Variant::Light)] variant: Variant,
     children: Children,
+    #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     // TODO: Implement variant
@@ -31,7 +32,7 @@ pub fn Alert(cx: Scope,
     );
 
     styled::view! { cx, styles,
-        <div class="alert">
+        <div class="alert" style=style>
             <div class="title">{title}</div>
             <div>
                 {children(cx)}

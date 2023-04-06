@@ -11,6 +11,7 @@ pub fn Flex(cx: Scope,
     #[prop(default=Direction::Row)] direction: Direction,
     #[prop(default=Wrap::Wrap)] wrap: Wrap,
     children: Children,
+    #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let justify_style = match justify {
@@ -53,7 +54,7 @@ pub fn Flex(cx: Scope,
     );
 
     styled::view! { cx, styles,
-        <div class="flex">
+        <div class="flex" style=style>
             {children(cx)}
         </div>
     }

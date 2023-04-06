@@ -8,6 +8,8 @@ pub struct Colors {
     pub background: Color,
     pub background_alt: Color,
     pub code_background: Color,
+    pub border: Color,
+    pub shell_border: Color,
 }
 
 pub enum Theme {
@@ -24,6 +26,8 @@ impl Theme {
                 background: Color::from_str("#fff").unwrap(),
                 background_alt: Color::from_str("#f8f9fa").unwrap(),
                 code_background: Color::from_str("#f8f9fa").unwrap(),
+                border: Color::from_str("#e0e0e0").unwrap(),
+                shell_border: Color::from_str("#e9ecef").unwrap(),
             },
         }
     }

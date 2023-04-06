@@ -8,6 +8,7 @@ pub fn Code(cx: Scope,
     #[prop(default=false)] block: bool,
     #[prop(optional)] color: Option<HighlightColor>,
     children: Children,
+    #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let colors = Theme::Light.colors();
@@ -23,7 +24,7 @@ pub fn Code(cx: Scope,
     );
 
     styled::view! { cx, styles,
-        <code>{children(cx)}</code>
+        <code style=style>{children(cx)}</code>
     }
 }
 
@@ -31,6 +32,7 @@ pub fn Code(cx: Scope,
 pub fn Mark(cx: Scope,
     #[prop(optional)] color: Option<HighlightColor>,
     children: Children,
+    #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let styles = style!(
@@ -42,7 +44,7 @@ pub fn Mark(cx: Scope,
     );
 
     styled::view! { cx, styles,
-        <span>
+        <span style=style>
             {children(cx)}
         </span>
     }

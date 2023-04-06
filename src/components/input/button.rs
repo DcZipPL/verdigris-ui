@@ -16,6 +16,7 @@ pub fn Button(cx: Scope,
     #[prop(default=false)] compact: bool,
     #[prop(default=false)] disabled: bool,
     children: Children,
+    #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let (foreground, filled, filled_hover, light, hover_light, hover_light_outline) = get_colors().unwrap();
@@ -85,6 +86,7 @@ pub fn Button(cx: Scope,
     styled::view! { cx, styles,
         <button class=if compact { "compact" } else { "full-size" }
                 disabled=disabled
+                style=style
         >
             {children(cx)}
         </button>

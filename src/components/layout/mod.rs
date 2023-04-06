@@ -2,6 +2,7 @@ pub mod grid;
 pub mod space;
 pub mod flex;
 pub mod stack;
+pub mod group;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Justify {

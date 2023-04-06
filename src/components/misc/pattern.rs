@@ -5,6 +5,7 @@ use styled::style;
 pub fn Pattern(cx: Scope,
     #[prop(default=PatternType::Dot)] pattern_type: PatternType,
     children: Children,
+    #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let styles = style!(
@@ -15,7 +16,7 @@ pub fn Pattern(cx: Scope,
     );
 
     styled::view! { cx, styles,
-        <div>
+        <div style=style>
             {children(cx)}
         </div>
     }

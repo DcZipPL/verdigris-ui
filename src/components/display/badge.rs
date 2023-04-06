@@ -9,10 +9,11 @@ pub fn Badge(cx: Scope,
     #[prop(default=Size::Small)] size: Size,
     #[prop(default=Radius::Circle)] radius: Radius,
     children: Children,
+    #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     view! { cx,
-        <span class="badge" class=radius.to_string() size=size.to_string()>
+        <span class="badge" class=radius.to_string() size=size.to_string() style=style>
             {children(cx)}
         </span>
     }

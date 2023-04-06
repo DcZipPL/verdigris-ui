@@ -4,6 +4,7 @@ use styled::style;
 #[component]
 pub fn Grid(cx: Scope,
     children: Children,
+    #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let styles = style!(
@@ -16,7 +17,7 @@ pub fn Grid(cx: Scope,
     );
 
     styled::view! { cx, styles,
-        <div>
+        <div style=style>
             {children(cx)}
         </div>
     }
