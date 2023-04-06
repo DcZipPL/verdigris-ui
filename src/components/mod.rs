@@ -38,6 +38,7 @@ pub enum Variant {
     Outline,
     Light,
     Subtle,
+    Transparent,
     Gradient(Color, Color, u8), // From, To, Angle
 }
 

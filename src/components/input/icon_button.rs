@@ -3,16 +3,14 @@ use styled::style;
 
 use crate::components::Size;
 use crate::components::Radius;
-use crate::components::Unit;
 use crate::components::Variant;
 use crate::components::input::get_colors;
 
 #[component]
-pub fn Button(cx: Scope,
+pub fn IconButton(cx: Scope,
     #[prop(default=Size::Small)] size: Size,
     #[prop(default=Radius::Small)] radius: Radius,
     #[prop(default=Variant::Filled)] variant: Variant,
-    #[prop(default=false)] compact: bool,
     #[prop(default=false)] disabled: bool,
     children: Children,
     #[prop(optional, into)] style: String,
@@ -23,20 +21,8 @@ pub fn Button(cx: Scope,
     let styles = style!(
         button {
             cursor: pointer;
-            height: ${
-                if compact {
-                    "auto".to_string()
-                } else {
-                    size.ib_height().to_string()
-                }
-            };
-            padding: ${
-                if compact {
-                    Unit::Rem(0.25).to_string()
-                } else {
-                    format!("0 {}", size.ib_padding())
-                }
-            };
+            height: ${size.ib_height().to_string()};
+			width: ${size.ib_height().to_string()};
             font-size: ${size.ib_font_size()};
             border-radius: ${radius.units()};
             border: ${colors.border_prop()};

@@ -5,7 +5,9 @@ use crate::components::{layout::{Position, Direction, Justify, flex::*}, Size};
 
 #[component]
 pub fn Group(cx: Scope,
+    /// Position of the group
     #[prop(default=Position::Center)] position: Position,
+    /// Spacing between the children
     #[prop(default=Size::Medium)] gap: Size,
     #[prop(default=false)] grow: bool,
     children: Children,
