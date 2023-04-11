@@ -12,7 +12,9 @@ pub struct Colors {
     pub shell_border: Color,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Default)]
 pub enum Theme {
+    #[default]
     Light,
 }
 

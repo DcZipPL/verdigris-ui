@@ -1,4 +1,5 @@
 use leptos::*;
+use leptos::leptos_dom::Transparent;
 use styled::style;
 
 use crate::components::Size;
@@ -14,11 +15,32 @@ pub fn Button(cx: Scope,
     #[prop(default=Variant::Filled)] variant: Variant,
     #[prop(default=false)] compact: bool,
     #[prop(default=false)] disabled: bool,
+    #[prop(optional, into)] left: Option<Box<dyn Fn(Scope) -> Fragment>>,
     children: Children,
     #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let colors = get_colors(variant).unwrap();
+
+    let left_childeren = if let Some(uleft) = left {
+        let extensions = uleft(cx)
+        .as_children()
+        .iter()
+        .filter_map(View::as_transparent)
+        .cloned()
+        .collect::<Vec<_>>();
+
+        let left_extension = extensions
+            .iter()
+            .filter_map(Transparent::downcast_ref::<ButtonExtension>)
+            .enumerate();
+
+        let result = left_extension.for_each(|(_, extension)| {
+            if let ButtonExtension::Left { children } = extension {
+                Some(children(cx))
+            }
+        });
+    };
 
     let styles = style!(
         button {
@@ -60,5 +82,24 @@ pub fn Button(cx: Scope,
         >
             {children(cx)}
         </button>
+    }
+}
+
+#[component(transparent)]
+pub fn ButtonLeft(cx: Scope,
+    children: Box<dyn Fn(Scope) -> Fragment>,
+) -> impl IntoView
+{
+    ButtonExtension::Left { children }
+}
+
+pub enum ButtonExtension {
+    Left { children: Box<dyn Fn(Scope) -> Fragment>, },
+    Right { children: Box<dyn Fn(Scope) -> Fragment>,},
+}
+
+impl IntoView for ButtonExtension {
+    fn into_view(self, _: Scope) -> View {
+      View::Transparent(Transparent::new(self))
     }
 }
