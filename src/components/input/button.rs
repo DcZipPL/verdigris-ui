@@ -1,5 +1,4 @@
 use leptos::*;
-use leptos::leptos_dom::Transparent;
 use styled::style;
 
 use crate::components::Size;
@@ -16,43 +15,11 @@ pub fn Button(cx: Scope,
     #[prop(default=Variant::Filled)] variant: Variant,
     #[prop(default=false)] compact: bool,
     #[prop(default=false)] disabled: bool,
-    #[prop(optional, into)] on_click: Option<MaybeSignal<bool>>,
     children: Box<dyn Fn(Scope) -> Fragment>,
     #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let colors = get_colors(variant).unwrap();
-
-    let btn_ref_local = create_node_ref(cx);
-
-    if let Some(on_click) = on_click {
-        btn_ref_local.on_load(cx, move |btn: HtmlElement<html::AnyElement>| {
-            btn.on(ev::click, move |_| { on_click(); });
-        });
-    }
-
-    let mut left_children = None;
-    let mut right_children = None;
-    let extensions = children(cx)
-        .as_children()
-        .iter()
-        .filter_map(View::as_transparent)
-        .cloned()
-        .collect::<Vec<_>>();
-
-    let left_extension = extensions
-        .iter()
-        .filter_map(Transparent::downcast_ref::<ButtonExtension>)
-        .enumerate();
-
-    let result = left_extension.for_each(|(_, extension)| {
-        if let ButtonExtension::Left { children } = extension {
-            left_children = Some(children(cx));
-        }
-        if let ButtonExtension::Right { children } = extension {
-            right_children = Some(children(cx));
-        }
-    });
 
     let styles = style!(
         button {
@@ -93,37 +60,8 @@ pub fn Button(cx: Scope,
                 style=style
         >
             <Flex gap=Size::Custom(Unit::Rem(0.25))>
-                {left_children}
                 {children(cx)}
-                {right_children}
             </Flex>
         </button>
-    }
-}
-
-#[component(transparent)]
-pub fn ButtonLeft(cx: Scope,
-    children: Box<dyn Fn(Scope) -> Fragment>,
-) -> impl IntoView
-{
-    ButtonExtension::Left { children }
-}
-
-#[component(transparent)]
-pub fn ButtonRight(cx: Scope,
-                  children: Box<dyn Fn(Scope) -> Fragment>,
-) -> impl IntoView
-{
-    ButtonExtension::Right { children }
-}
-
-pub enum ButtonExtension {
-    Left { children: Box<dyn Fn(Scope) -> Fragment>, },
-    Right { children: Box<dyn Fn(Scope) -> Fragment>,},
-}
-
-impl IntoView for ButtonExtension {
-    fn into_view(self, _: Scope) -> View {
-      View::Transparent(Transparent::new(self))
     }
 }

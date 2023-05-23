@@ -11,11 +11,11 @@ fn get_colors(variant: Variant) -> anyhow::Result<ButtonColor> {
     Ok(ButtonColor {
         variant,
         filled: colors.primary,
-        filled_hover: colors.primary.clone().darken(0.075)?,
+        filled_hover: colors.primary.clone().darken(0.075),
         foreground: colors.primary_foreground,
-        light: colors.primary.clone().fade(0.1)?,
-        hover_light: colors.primary.clone().fade(0.15)?,
-        hover_light_outline: colors.primary.clone().fade(0.05)?,
+        light: colors.primary.clone().fade(0.1),
+        hover_light: colors.primary.clone().fade(0.15),
+        hover_light_outline: colors.primary.clone().fade(0.05),
     })
 }
 

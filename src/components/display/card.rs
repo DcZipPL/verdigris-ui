@@ -33,7 +33,7 @@ pub fn Card(cx: Scope,
 
     styled::view! { cx, styles,
         <div class="card"
-            class=if hover_tilt { "hover-tilt" } else { "no-hover-tilt" }
+            class:hover-tilt=hover_tilt
             style=style
         >
             {children(cx)}

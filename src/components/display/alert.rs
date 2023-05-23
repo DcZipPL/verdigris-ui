@@ -20,7 +20,7 @@ pub fn Alert(cx: Scope,
         .alert {
             border-radius: ${radius.units()};
             padding: 0.75rem 0.75rem 0.75rem 1rem;
-            background-color: ${colors.primary.clone().fade(0.1).unwrap().rgba()};
+            background-color: ${colors.primary.clone().fade(0.1).rgba()};
             text-align: left;
         }
 
