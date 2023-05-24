@@ -14,10 +14,11 @@ pub fn Alert(cx: Scope,
 {
     // TODO: Implement variant
 
-    let colors = Theme::Light.colors();
+    let colors = Theme::default().colors();
 
     let styles = style!(
         .alert {
+            color: ${colors.foreground.rgba()};
             border-radius: ${radius.units()};
             padding: 0.75rem 0.75rem 0.75rem 1rem;
             background-color: ${colors.primary.clone().fade(0.1).rgba()};

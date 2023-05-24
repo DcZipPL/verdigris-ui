@@ -13,11 +13,12 @@ pub fn Card(cx: Scope,
     #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
-    let colors = Theme::Light.colors();
+    let colors = Theme::default().colors();
     let border_prop = if border { format!("1px solid {}", colors.border.rgba()) } else { "none".to_string() };
 
     let styles = style!(
         .card {
+            color: ${colors.foreground.rgba()};
             box-shadow: ${"rgba(0, 0, 0, 0.05) 0px 0.0625rem 0.1875rem, rgba(0, 0, 0, 0.05) 0px 0.625rem 0.9375rem -0.3125rem, rgba(0, 0, 0, 0.04) 0px 0.4375rem 0.4375rem -0.3125rem"};
             background-color: ${colors.background.rgba()};
             border: ${border_prop};

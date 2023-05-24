@@ -7,7 +7,7 @@ pub mod button;
 pub mod icon_button;
 
 fn get_colors(variant: Variant) -> anyhow::Result<ButtonColor> {
-    let colors = Theme::Light.colors();
+    let colors = Theme::default().colors();
     Ok(ButtonColor {
         variant,
         filled: colors.primary,

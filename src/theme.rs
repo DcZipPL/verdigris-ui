@@ -14,8 +14,9 @@ pub struct Colors {
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
 pub enum Theme {
-    #[default]
     Light,
+    #[default]
+    Dark,
 }
 
 impl Theme {
@@ -30,6 +31,16 @@ impl Theme {
                 code_background: Color::from_str("#f8f9fa").unwrap(),
                 border: Color::from_str("#e0e0e0").unwrap(),
                 shell_border: Color::from_str("#e9ecef").unwrap(),
+            },
+            Theme::Dark => Colors {
+                primary: Color::from_str("#46c7c0").unwrap(),
+                primary_foreground: Color::from_str("#fff").unwrap(),
+                foreground: Color::from_str("#fff").unwrap(),
+                background: Color::from_str("#050510").unwrap(),
+                background_alt: Color::from_str("#0f1216").unwrap(),
+                code_background: Color::from_str("#1e2024").unwrap(),
+                border: Color::from_str("#202228").unwrap(),
+                shell_border: Color::from_rgba(0, 0, 0, 0f64).unwrap(),
             },
         }
     }

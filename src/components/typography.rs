@@ -10,9 +10,10 @@ pub fn Code(cx: Scope,
     #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
-    let colors = Theme::Light.colors();
+    let colors = Theme::default().colors();
     let styles = style!(
         code {
+            color: ${colors.foreground.rgba()};
             padding: 0.125rem;
             border-radius: 0.25rem;
             display: inline;
@@ -34,9 +35,10 @@ pub fn CodeBlock(cx: Scope,
     #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
-    let colors = Theme::Light.colors();
+    let colors = Theme::default().colors();
     let styles = style!(
         pre {
+            color: ${colors.foreground.rgba()};
             text-align: left;
             padding: 0.75rem 1rem;
             border-radius: 0.25rem;
@@ -60,13 +62,15 @@ pub fn CodeBlockTab(cx: Scope,
 {
     let (current, set_current) = create_signal(cx, 0i16);
 
-    let colors = Theme::Light.colors();
+    let colors = Theme::default().colors();
     let styles = style!(
         div {
+            color: ${colors.foreground.rgba()};
             text-align: left;
         }
 
         & > button {
+            color: ${colors.foreground.rgba()};
             cursor: pointer;
             height: 2rem;
             font-size: 0.8125rem;
@@ -131,8 +135,10 @@ pub fn Mark(cx: Scope,
     #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
+    let colors = Theme::default().colors();
     let styles = style!(
         span {
+            color: ${colors.foreground.rgba()};
             background-color: ${
                 if let Some(c) = color {c.to_string()} else {"#ffec99".to_string()}
             };

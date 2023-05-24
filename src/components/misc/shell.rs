@@ -14,7 +14,7 @@ pub fn HeaderBar(cx: Scope,
     #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
-    let colors = Theme::Light.colors();
+    let colors = Theme::default().colors();
 
     let mut border = format!("{}  0.0625rem solid", colors.shell_border.rgba());
     if !with_border {
