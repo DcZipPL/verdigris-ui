@@ -1,7 +1,7 @@
 use leptos::*;
 use styled::style;
 
-use crate::{theme::{Theme, HighlightColor}, components::input::button::Button};
+use crate::theme::{Theme, HighlightColor};
 
 #[component]
 pub fn Code(cx: Scope,
@@ -58,31 +58,69 @@ pub fn CodeBlockTab(cx: Scope,
     #[prop(into)] data: MaybeSignal<Vec<CodeTab>>,
 ) -> impl IntoView
 {
-    println!("CodeBlockTab");
     let (current, set_current) = create_signal(cx, 0i16);
 
-    view! { cx,
-        <Button on:click=move |_| set_current.update(|v| *v += 1)>"h"</Button>
-        <For
+    let colors = Theme::Light.colors();
+    let styles = style!(
+        div {
+            text-align: left;
+        }
+
+        & > button {
+            cursor: pointer;
+            height: 2rem;
+            font-size: 0.8125rem;
+            border: ${colors.border.rgba()} 1px solid;
+            border-bottom: none;
+            border-radius: 0.25rem 0.25rem 0 0;
+            padding: 0 0.75rem;
+        }
+
+        div > div > pre {
+            margin-top: 0;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0 0.25rem 0.25rem;
+            border: ${colors.border.rgba()} 1px solid;
+            font-size: 0.8125rem;
+            line-height: 1.7;
+            background-color: ${
+                 {colors.code_background.rgba()}
+            };
+        }
+    );
+
+    styled::view! { cx, styles,
+        <div>
+            <For
             each=data.clone()
             key=|item| item.id
             view=move |cx, item: CodeTab| {
                 view! { cx,
-                    <button on:click=move |_| set_current.update(|v| *v += 1) id=format!("btn{}", item.id)>{item.title}"h"</button>
+                    <button on:click=move |_| set_current.set(item.id) style:background=move || {
+                        if item.id == current() {
+                            colors.code_background.rgba()
+                        } else {
+                            colors.background.rgba()
+                        }
+                    }>{item.title.clone()}</button>
                 }
             }
-        />
-        <For
-            each=data
-            key=|item| item.id
-            view=move |cx, item: CodeTab| {
-                view! { cx,
-                    <CodeBlock style=format!("display: {};", if current.get() == item.id { "block" } else { "none" })>
-                        {item.code}
-                    </CodeBlock>
+            />
+            <For
+                each=data
+                key=|item| item.id
+                view=move |cx, item: CodeTab| {
+                    view! { cx,
+                        <div style=move || format!("display: {}",
+                            if item.id == current() {"block"} else {"none"}
+                        )>
+                            <pre>{item.code}</pre>
+                        </div>
+                    }
                 }
-            }
-        />
+            />
+        </div>
     }
 }
 
