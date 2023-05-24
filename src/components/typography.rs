@@ -1,7 +1,8 @@
-use leptos::*;
+use leptos::{*, ev::MouseEvent};
+use linked_hash_map::LinkedHashMap;
 use styled::style;
 
-use crate::theme::{Theme, HighlightColor};
+use crate::{theme::{Theme, HighlightColor}, components::input::button::Button};
 
 #[component]
 pub fn Code(cx: Scope,
@@ -55,12 +56,34 @@ pub fn CodeBlock(cx: Scope,
 
 #[component]
 pub fn CodeBlockTab(cx: Scope,
-    #[prop(into)] title: String,
-    children: Children,
+    #[prop(into)] data: MaybeSignal<Vec<CodeTab>>,
 ) -> impl IntoView
 {
+    println!("CodeBlockTab");
+    let (current, set_current) = create_signal(cx, 0i16);
+
     view! { cx,
-        {children(cx)}
+        <Button on:click=move |_| set_current.update(|v| *v += 1)>"h"</Button>
+        <For
+            each=data.clone()
+            key=|item| item.id
+            view=move |cx, item: CodeTab| {
+                view! { cx,
+                    <button on:click=move |_| set_current.update(|v| *v += 1) id=format!("btn{}", item.id)>{item.title}"h"</button>
+                }
+            }
+        />
+        <For
+            each=data
+            key=|item| item.id
+            view=move |cx, item: CodeTab| {
+                view! { cx,
+                    <CodeBlock style=format!("display: {};", if current.get() == item.id { "block" } else { "none" })>
+                        {item.code}
+                    </CodeBlock>
+                }
+            }
+        />
     }
 }
 
@@ -84,4 +107,17 @@ pub fn Mark(cx: Scope,
             {children(cx)}
         </span>
     }
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct CodeTab {
+    pub id: i16,
+    pub title: String,
+    pub language: String,
+    pub code: String,
+}
+
+impl CodeTab {
+    pub fn new(id: i16, title: String, language: String, code: String) -> Self { Self { id, title, language, code } }
+    pub fn new_from_str(id: i16, title: &str, language: &str, code: &str) -> Self { Self { id, title: title.to_string(), language: language.to_string(), code: code.to_string() } }
 }
