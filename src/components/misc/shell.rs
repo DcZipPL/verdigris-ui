@@ -9,16 +9,22 @@ pub fn HeaderBar(cx: Scope,
     #[prop(default=Size::Large)] height: Size,
     /// Edge padding. Padding is applied to the left and right edges of the headerbar. Defaults to Size::Medium.
     #[prop(default=Size::Medium)] ep: Size,
+    #[prop(default=true)] with_border: bool,
     children: Children,
     #[prop(optional, into)] style: String,
 ) -> impl IntoView
 {
     let colors = Theme::Light.colors();
 
+    let mut border = format!("{}  0.0625rem solid", colors.shell_border.rgba());
+    if !with_border {
+        border = "none".to_string();
+    }
+
     let styles = style!(
         div {
             height: ${height.headerbar_height()};
-            border-bottom: ${colors.shell_border.rgba()} 0.0625rem solid;
+            border-bottom: ${border};
         }
 
         & > div {
